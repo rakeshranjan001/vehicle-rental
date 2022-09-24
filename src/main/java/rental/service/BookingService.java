@@ -2,7 +2,6 @@ package rental.service;
 
 import rental.dao.BookingDao;
 import rental.dao.VehicleBookingDao;
-import rental.dao.VehicleDao;
 import rental.model.Booking;
 import rental.model.Vehicle;
 import rental.util.BookingUtil;
@@ -21,12 +20,14 @@ public class BookingService {
 
     private final InventoryManagerService inventoryManagerService;
 
-    public BookingService(){
-        bookingDao = BookingDao.getInstance();
-        vehicleBookingDao = VehicleBookingDao.getInstance();
-        inventoryManagerService = new InventoryManagerService();
-        vehicleService = new VehicleServiceImpl();
-        bookingUtil = new BookingUtil();
+    public BookingService(BookingDao bookingDao, VehicleBookingDao vehicleBookingDao,
+                          BookingUtil bookingUtil, VehicleService vehicleService,
+                          InventoryManagerService inventoryManagerService){
+        this.bookingDao = bookingDao;
+        this.vehicleBookingDao = vehicleBookingDao;
+        this.bookingUtil = bookingUtil;
+        this.vehicleService = vehicleService;
+        this.inventoryManagerService = inventoryManagerService;
     }
 
 

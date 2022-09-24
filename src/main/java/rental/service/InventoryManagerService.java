@@ -11,9 +11,10 @@ public class InventoryManagerService {
 
     private final VehicleService vehicleService;
     private final BranchService branchService;
-    public InventoryManagerService(){
-        vehicleService = new VehicleServiceImpl();
-        branchService = new BranchServiceImpl();
+
+    public InventoryManagerService(VehicleService vehicleService, BranchService branchService) {
+        this.vehicleService = vehicleService;
+        this.branchService = branchService;
     }
 
     /*

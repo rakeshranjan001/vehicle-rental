@@ -14,12 +14,14 @@ public class FileInputProcessor {
     private final BookingService bookingService;
     private final OutputUtil outputUtil;
 
-    public FileInputProcessor(File inputFile) {
+    public FileInputProcessor(File inputFile, BranchService branchService,
+                              InventoryManagerService inventoryManagerService, BookingService bookingService,
+                              OutputUtil outputUtil) {
         this.inputFile = inputFile;
-        this.branchService = new BranchServiceImpl();
-        this.inventoryManagerService = new InventoryManagerService();
-        this.bookingService = new BookingService();
-        this.outputUtil = new OutputUtil();
+        this.branchService = branchService;
+        this.inventoryManagerService = inventoryManagerService;
+        this.bookingService = bookingService;
+        this.outputUtil = outputUtil;
     }
 
     public void process() throws Exception {

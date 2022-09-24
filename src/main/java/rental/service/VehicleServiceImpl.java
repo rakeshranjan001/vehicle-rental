@@ -7,8 +7,8 @@ public class VehicleServiceImpl implements VehicleService{
 
     private final VehicleDao vehicleDao;
 
-    public VehicleServiceImpl(){
-        this.vehicleDao = VehicleDao.getInstance();
+    public VehicleServiceImpl(VehicleDao vehicleDao){
+        this.vehicleDao = vehicleDao;
     }
 
     @Override
