@@ -2,12 +2,14 @@ package rental.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Branch {
     private String id;
     private Set<String> types;
