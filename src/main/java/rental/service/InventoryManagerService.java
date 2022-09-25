@@ -6,10 +6,13 @@ import rental.model.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class InventoryManagerService {
 
+    private final Logger logger = Logger.getLogger("logs");
     private final VehicleService vehicleService;
     private final BranchService branchService;
 
@@ -35,17 +38,13 @@ public class InventoryManagerService {
         Branch branch = branchService.getBranch(branchId);
         List<Vehicle> vehicleList = new ArrayList<>();
 
-        try{
-            branch.getVehicleIds().stream().forEach(id -> {
-                try {
-                    vehicleList.add(vehicleService.getVehicle(id));
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        }catch (Exception e){
-
-        }
+        branch.getVehicleIds().stream().forEach(id -> {
+            try {
+                vehicleList.add(vehicleService.getVehicle(id));
+            } catch (Exception e) {
+                logger.log(Level.WARNING,e.getMessage());
+            }
+        });
         return vehicleList;
     }
 

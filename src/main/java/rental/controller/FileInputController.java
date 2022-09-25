@@ -8,9 +8,12 @@ import rental.util.OutputUtil;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileInputController {
 
+    private final Logger logger = Logger.getLogger("logs");
     private final File inputFile;
     private final BranchService branchService;
     private final InventoryManagerService inventoryManagerService;
@@ -65,7 +68,10 @@ public class FileInputController {
                 case "DISPLAY_VEHICLES":
                     outputUtil.printListOfVehicles(bookingService.displayAllVehiclesForBranch(parts[1],parts[2],parts[3]));
                     break;
-                default: System.out.println(parts[0] + " : Action Not supported !!");
+                default: {
+                    System.out.println(parts[0] + " : Action Not supported !!");
+                    logger.log(Level.WARNING,line + " " + parts[0] + "action is not supported");
+                }
             }
         }
     }

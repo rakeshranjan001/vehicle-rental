@@ -12,9 +12,12 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class BookingService {
+    private final Logger logger = Logger.getLogger("logs");
     private final BookingDao bookingDao;
     private final VehicleBookingDao vehicleBookingDao;
     private final BookingUtil bookingUtil;
@@ -55,6 +58,7 @@ public class BookingService {
             try {
                 return vehicleService.getVehicle(id);
             } catch (Exception e) {
+                logger.log(Level.WARNING,e.getMessage());
                 throw new RuntimeException(e);
             }
         }).collect(Collectors.toList());
