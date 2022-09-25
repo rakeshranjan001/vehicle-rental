@@ -1,5 +1,6 @@
 package rental;
 
+import rental.controller.FileInputController;
 import rental.dao.BookingDao;
 import rental.dao.BranchDao;
 import rental.dao.VehicleBookingDao;
@@ -20,8 +21,8 @@ public class Geektrust {
         BookingService bookingService = new BookingService(bookingDao, VehicleBookingDao.getInstance(),new BookingUtil(),vehicleService,inventoryManagerService);
         BranchService branchService = new BranchServiceImpl(branchDao);
 
-        FileInputProcessor fileInputProcessor = new FileInputProcessor(inputFile, branchService, inventoryManagerService,
+        FileInputController fileInputController = new FileInputController(inputFile, branchService, inventoryManagerService,
                 bookingService, new OutputUtil());
-        fileInputProcessor.process();
+        fileInputController.process();
     }
 }

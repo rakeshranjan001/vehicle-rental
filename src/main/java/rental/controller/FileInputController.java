@@ -1,12 +1,15 @@
-package rental.service;
+package rental.controller;
 
+import rental.service.BookingService;
+import rental.service.BranchService;
+import rental.service.InventoryManagerService;
 import rental.util.OutputUtil;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class FileInputProcessor {
+public class FileInputController {
 
     private final File inputFile;
     private final BranchService branchService;
@@ -14,9 +17,9 @@ public class FileInputProcessor {
     private final BookingService bookingService;
     private final OutputUtil outputUtil;
 
-    public FileInputProcessor(File inputFile, BranchService branchService,
-                              InventoryManagerService inventoryManagerService, BookingService bookingService,
-                              OutputUtil outputUtil) {
+    public FileInputController(File inputFile, BranchService branchService,
+                               InventoryManagerService inventoryManagerService, BookingService bookingService,
+                               OutputUtil outputUtil) {
         this.inputFile = inputFile;
         this.branchService = branchService;
         this.inventoryManagerService = inventoryManagerService;
