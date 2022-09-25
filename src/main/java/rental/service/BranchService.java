@@ -11,4 +11,6 @@ public interface BranchService {
     Branch getBranch(String branchId);
 
     void addVehicle(String branchName, String vehicleId);
+
+    void removeBranch(String branchName);
 }

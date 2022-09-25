@@ -2,6 +2,8 @@ package rental.service;
 
 import rental.dao.BookingDao;
 import rental.dao.VehicleBookingDao;
+import rental.exceptions.DuplicateEntryException;
+import rental.exceptions.NotFoundException;
 import rental.model.Booking;
 import rental.model.Vehicle;
 import rental.util.BookingUtil;
@@ -68,7 +70,7 @@ public class BookingService {
         Vehicle vehicle;
         if(listOfBookingIds.size() == 0){
             if(vehicleListOfType.size() == 0){
-                throw new Exception("No vehicles available");
+                throw new NotFoundException("No vehicles available");
             }
             vehicle = vehicleListOfType.get(0);
         }else{
@@ -77,7 +79,7 @@ public class BookingService {
                     vehicleListOfType, bookingList,
                     Integer.parseInt(startTime), Integer.parseInt(endTime));
             if(vehicleIdList.size() == 0){
-                throw new Exception("No vehicles available");
+                throw new NotFoundException("No vehicles available");
             }
             vehicle = vehicleService.getVehicle(vehicleIdList.get(0));
         }

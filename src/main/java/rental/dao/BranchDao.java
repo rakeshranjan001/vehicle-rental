@@ -1,5 +1,6 @@
 package rental.dao;
 
+import rental.exceptions.DuplicateEntryException;
 import rental.model.Branch;
 
 import java.util.HashMap;
@@ -22,12 +23,17 @@ public class BranchDao {
 
     public void addBranch(Branch branch) throws Exception {
         if(branchMap.containsKey(branch.getId())){
-            throw new Exception("Branch name already present !!");
+            throw new DuplicateEntryException("Branch name already present !!");
         }
         branchMap.put(branch.getId(), branch);
     }
 
     public Branch getBranch(String branchId){
         return branchMap.get(branchId);
+    }
+
+    public void removeBranch(String branchId){
+        if(branchMap.containsKey(branchId))
+                branchMap.remove(branchId);
     }
 }

@@ -1,5 +1,7 @@
 package rental.dao;
 
+import rental.exceptions.DuplicateEntryException;
+import rental.exceptions.NotFoundException;
 import rental.model.Vehicle;
 
 import java.util.HashMap;
@@ -22,7 +24,7 @@ public class VehicleDao {
 
     public void addVehicle(Vehicle vehicle) throws Exception {
         if(vehicleMap.containsKey(vehicle.getId())){
-            throw new Exception("Vehicle already present");
+            throw new DuplicateEntryException("Vehicle already present");
         }
 
         vehicleMap.put(vehicle.getId(), vehicle);
@@ -30,7 +32,7 @@ public class VehicleDao {
 
     public Vehicle getVehicle(String id) throws Exception {
         if(!vehicleMap.containsKey(id)){
-            throw new Exception("Vehicle not present !");
+            throw new NotFoundException("Vehicle not present !");
         }
         return vehicleMap.get(id);
     }

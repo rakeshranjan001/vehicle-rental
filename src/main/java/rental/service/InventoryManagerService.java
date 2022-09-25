@@ -1,5 +1,6 @@
 package rental.service;
 
+import rental.exceptions.NotSupportedException;
 import rental.model.Branch;
 import rental.model.Vehicle;
 
@@ -23,7 +24,7 @@ public class InventoryManagerService {
     public void addVehicleToBranch(String branchId, String vehicleType, String vehicleId, String price) throws Exception {
 
         if(!branchService.getBranch(branchId).getTypes().contains(vehicleType)){
-            throw new Exception("Vehicle Type Not Supported");
+            throw new NotSupportedException("Vehicle Type Not Supported");
         }
 
         vehicleService.addVehicle(branchId,vehicleId,vehicleType,Integer.parseInt(price));
@@ -34,13 +35,17 @@ public class InventoryManagerService {
         Branch branch = branchService.getBranch(branchId);
         List<Vehicle> vehicleList = new ArrayList<>();
 
-        branch.getVehicleIds().stream().forEach(id -> {
-            try {
-                vehicleList.add(vehicleService.getVehicle(id));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        try{
+            branch.getVehicleIds().stream().forEach(id -> {
+                try {
+                    vehicleList.add(vehicleService.getVehicle(id));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }catch (Exception e){
+
+        }
         return vehicleList;
     }
 

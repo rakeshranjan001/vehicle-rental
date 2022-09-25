@@ -7,10 +7,10 @@ import java.util.List;
 
 public class BranchServiceImpl implements BranchService{
 
-    BranchDao branchDao;
+    private final BranchDao branchDao;
 
-    public BranchServiceImpl(){
-        branchDao = BranchDao.getInstance();
+    public BranchServiceImpl(BranchDao branchDao){
+        this.branchDao = branchDao;
     }
 
     @Override
@@ -27,5 +27,10 @@ public class BranchServiceImpl implements BranchService{
     public void addVehicle(String branchName, String vehicleId) {
         Branch branch = branchDao.getBranch(branchName);
         branch.addVehicle(vehicleId);
+    }
+
+    @Override
+    public void removeBranch(String branchName){
+        branchDao.removeBranch(branchName);
     }
 }
