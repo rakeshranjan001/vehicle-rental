@@ -38,13 +38,18 @@ public class InventoryManagerService {
         Branch branch = branchService.getBranch(branchId);
         List<Vehicle> vehicleList = new ArrayList<>();
 
-        branch.getVehicleIds().stream().forEach(id -> {
-            try {
-                vehicleList.add(vehicleService.getVehicle(id));
-            } catch (Exception e) {
-                logger.log(Level.WARNING,e.getMessage());
-            }
-        });
+        try {
+            branch.getVehicleIds().stream().forEach(id -> {
+                try {
+                    vehicleList.add(vehicleService.getVehicle(id));
+                } catch (Exception e) {
+                    logger.log(Level.WARNING,e.getMessage());
+                }
+            });
+        }catch (Exception e){
+            logger.log(Level.WARNING,e.getMessage());
+            return vehicleList;
+        }
         return vehicleList;
     }
 

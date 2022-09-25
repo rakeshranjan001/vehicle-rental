@@ -1,6 +1,5 @@
 package rental;
 
-import jdk.jpackage.internal.Log;
 import rental.controller.FileInputController;
 import rental.dao.BookingDao;
 import rental.dao.BranchDao;
